@@ -104,9 +104,9 @@ public class PostgresIntegrationTests {
 				Arrays.sort(names);
 				for (String name : names) {
 					String resolved = environment.getProperty(name);
-					String value = source.getProperty(name).toString();
-					if (resolved.equals(value)) {
-						log.info(name + "=" + resolved);
+					String value = (String) source.getProperty(name);
+					if (value != null && resolved != null && resolved.equals(value)) {
+    				log.info(name + "=" + resolved);
 					}
 					else {
 						log.info(name + "=" + value + " OVERRIDDEN to " + resolved);

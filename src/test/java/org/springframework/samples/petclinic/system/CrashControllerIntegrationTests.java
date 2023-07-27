@@ -69,9 +69,13 @@ class CrashControllerIntegrationTests {
 				});
 		assertThat(resp).isNotNull();
 		assertThat(resp.getStatusCode().is5xxServerError());
-		assertThat(resp.getBody().containsKey("timestamp"));
-		assertThat(resp.getBody().containsKey("status"));
-		assertThat(resp.getBody().containsKey("error"));
+		if (resp != null && resp.getBody() != null) {
+    		assertThat(resp.getBody().containsKey("timestamp"));
+    		assertThat(resp.getBody().containsKey("status"));
+    		assertThat(resp.getBody().containsKey("error"));
+		}
+
+
 		assertThat(resp.getBody()).containsEntry("message",
 				"Expected: controller used to showcase what happens when an exception is thrown");
 		assertThat(resp.getBody()).containsEntry("path", "/oups");
